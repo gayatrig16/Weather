@@ -18,18 +18,19 @@ async function getWeather() {
     if (data.cod === 200) {
       const temp = data.main.temp;
       const humidity = data.main.humidity;
-      const weather = data.weather[0].main;
+      const forecast = data.weather[0].description;
+      const formattedForecast = forecast.charAt(0).toUpperCase() + forecast.slice(1);
 
       resultBox.innerHTML = `
         <h2>${data.name}</h2>
-        <p> Temperature: ${temp} °C</p>
-        <p> Humidity: ${humidity}%</p>
-        <p> Forecast: ${weather}</p>
+        <p>🌡️ Temperature: ${temp} °C</p>
+        <p>💧 Humidity: ${humidity}%</p>
+        <p>🌥️ Forecast: ${formattedForecast}</p>
       `;
     } else {
       resultBox.innerHTML = "City not found. Please try again.";
     }
   } catch (error) {
-    resultBox.innerHTML = "Error fetching data. Please try later.";
+    resultBox.innerHTML = "Error fetching weather data.";
   }
 }
